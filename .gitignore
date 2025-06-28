@@ -1,0 +1,9 @@
+hotelapp/__pycache__/
+
+hotelapp/migrations/__pycache__/
+
+db.sqlite3
+HotelPreorderproj/__pycache__/
+media/food_img/
+staticfiles/
+hotelapp/Procfile

@@ -1,0 +1,172 @@
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Order Card styling */
+.order-card {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 800px; /* Maximum width for larger screens */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 20px auto; /* Center horizontally with some spacing from the top */
+}
+
+/* Header styling */
+.order-card h2 {
+    color: #FF6F00;
+    margin-bottom: 20px;
+}
+
+/* Order Summary styling */
+.order-summary {
+    margin-bottom: 20px;
+    text-align: left;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.order-summary ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.order-summary li {
+    margin: 5px 0;
+}
+
+/* Estimated Time styling */
+.estimated-time {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Status bar styling */
+.status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    position: relative;
+}
+
+/* Step styling */
+.step {
+    text-align: center;
+    flex: 1;
+    position: relative;
+}
+
+.step .circle {
+    width: 60px;
+    height: 60px;
+    background-color: #d9d9d9;
+    border: 4px solid #ffffff;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.step.active .circle {
+    background-color: #FF6F00;
+    box-shadow: 0px 4px 8px rgba(255, 138, 0, 0.5);
+}
+
+.step p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #444444;
+}
+
+/* Line styling */
+.line {
+    height: 4px;
+    background-color: #d9d9d9;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    margin: 0 10px; /* Centering the line */
+    transition: background-color 0.3s;
+}
+
+.line.active {
+    background-color: #FFB74D;
+}
+
+/* Order Status Update styling */
+.order-status-update {
+    margin-top: 20px;
+    background-color: #e6f7ff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Delivery Info styling */
+.delivery-info {
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Customer Support Info styling */
+.support {
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Feedback Form styling */
+.feedback {
+    margin-top: 20px;
+    background-color: #f2f2f2;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.feedback textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.feedback button {
+    background-color: #FF6F00;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.feedback button:hover {
+    background-color: #ff8f33;
+}
+
+/* Social Media Links styling */
+.social-media {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.social-media a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #FF6F00;
+}
+
+.social-media a:hover {
+    text-decoration: underline;
+}

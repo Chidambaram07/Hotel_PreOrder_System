@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static "css/accounts.css"%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+   
+    <title>Login</title>
+</head>
+
+<body onload="toggle()">
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form method="post">
+                {% csrf_token %}
+                <h1>Create Account</h1>
+                <span class="err">
+                    {% if action == 'register' %}{{error}}{% endif %}
+                </span>
+                <input type="hidden" name="form_type" value="register"/>
+                <input type="text" placeholder="Name" name="username" id="reg_name" required><span id="err_name" class="err"></span>
+                <input type="email" placeholder="Email" name="email" required id="reg_email"><span id="err_email" class="err"></span>
+                <input type="password" placeholder="Password" name="pwd" required id="reg_pwd"><span id="err_pwd" class="err"></span>
+                <input type="password" placeholder="Confirm Password" name="con_pwd" required id="reg_pwd"><span id="err_con_pwd" class="err"></span>
+                <input type="number" placeholder="MobileNumber" name="mobile">
+                <!--select name="role" id="">
+                    <option value="f">Farmer</option>
+                    <option value="c">Consumer</option>
+                </select-->
+                <button>Sign Up</button>
+            </form>
+        </div>
+
+        <div class="form-container sign-in paytone-one-regular ">
+            <form method="post" >
+                {% csrf_token %}
+                <h1 >LOGIN</h1>
+                <span class="err" id="1log_msg">
+                    {% if action == "login" %}{{error}}{% endif %}
+                </span>
+                <input type="hidden" name="form_type" value="login"/>
+                <input type="email" placeholder="Email" name="email" id="log_email">
+                <input type="password" placeholder="Password" name="pwd" id="log_pwd">
+
+                <a href="#">Forgot Your Password</a>
+                <button>Login</button>
+            </form>
+        </div>
+
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Enter your personal detials to use all features of Hotel Preorder System app</p>
+                    <button class="hidden" id="login">Login</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>New to HotelPreOrder!</h1>
+                    <p>Register to HotelPreOrder to buy your desired food and enjoy!</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static "js/accounts.js"%}"></script>
+    <script>
+        const container = document.getElementById('container');
+        const registerBtn = document.getElementById('register');
+        const loginBtn = document.getElementById('login');
+        
+        
+        registerBtn.addEventListener('click', () =>{
+            container.classList.add("active")
+        });
+        loginBtn.addEventListener('click', () =>{
+            container.classList.remove("active")
+        });
+        function toggle(){
+            {% if action == "register" %}
+            container.classList.add("active");
+            {% endif %}            
+        }
+    </script>
+</body>
+
+</html>

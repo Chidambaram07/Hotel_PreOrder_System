@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: #f4f4f4;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 1em 0;
+}
+
+
+/* Hero Section */
+#hero {
+    position: relative;
+    overflow: hidden;
+    height: 100vh; /* Full screen height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+.carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.slide {
+    flex: 1;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover; /* Ensure the image covers the entire background */
+}
+
+.slide.active {
+    display: block;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+.hero-content p {
+    font-size: 1.5em;
+    margin: 1em 0;
+}
+
+.btn {
+    text-decoration: none;
+    color: #fff;
+    background: red;
+    padding: 0.7em 2em;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #f4a261;
+}
+
+/* Specials Section */
+#specials {
+    text-align: center;
+    padding: 2em 5%;
+}
+
+.special-items {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.special-items .item {
+    margin: 1em;
+    text-align: center;
+    max-width: 300px;
+}
+
+.special-items img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1em;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    background: #333;
+    color: #fff;
+    padding: 1em 0;
+    margin-top: 2em;
+}
+.lexend{
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+  }

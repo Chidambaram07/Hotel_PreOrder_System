@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Order Tracking{% endblock title %}
+{% block CustomHeaders %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'css/ordertrack.css' %}">
+{% endblock CustomHeaders %}
+{% block content %}
+<div class="order-card">
+    <h2>Order Tracking</h2>
+    {% for x in order %}
+    <div>
+    <!-- Order Summary -->
+    <div class="order-summary">
+        <h3>Order Summary</h3>
+        <ul>
+            {% for food in x.Food %}
+            <li>{{food.food_name}} - {{food.quantity}}</li>
+            {% endfor %}
+        </ul>
+        <p><strong>Total Price:</strong> {{x.cost}}</p>
+    </div>
+
+    <!-- Estimated Time -->
+    <div class="estimated-time">
+        <p><strong>Estimated Time:</strong> 20 minutes</p>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status" id="status">
+        <div class="step {% if x.status >= 1 %}active{% endif %}" data-step="1">
+            <div class="circle"></div>
+            <p>Order Placed</p>
+        </div>
+        <div class="line {% if x.status >= 2 %}active{% endif %}"></div>
+        <div class="step {% if x.status >= 2 %}active{% endif %}" data-step="2">
+            <div class="circle"></div>
+            <p>Being Prepared</p>
+        </div>
+        <div class="line {% if x.status >= 3 %}active{% endif %}"></div>
+        <div class="step {% if x.status >= 3 %}active{% endif %}" data-step="3">
+            <div class="circle"></div>
+            <p>Ready for Pickup</p>
+        </div>
+        <div class="line {% if x.status == 4 %}active{% endif %}"></div>
+        <div class="step {% if x.status == 4 %}active{% endif %}" data-step="4">
+            <div class="circle"></div>
+            <p>Completed</p>
+        </div>
+    </div>
+    
+
+    <!-- Order Status Update -->
+    <div class="order-status-update">
+        <p><strong>Status Update:</strong>{% if x.status == 1 %}Order Placed
+            {% elif x.status == 2 %}Taken
+            {% elif x.status == 3 %}Ready
+            {% elif x.status == 4 %}Completed
+            {% endif %}</p>
+    </div>
+    <!-- Feedback Section -->
+    <div class="feedback">
+        <p><strong>How was your order?</strong></p>
+        <form>
+            <label for="rating">Rate your order:</label>
+            <select id="rating" name="rating">
+                <option value="5">5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="2">2 Stars</option>
+                <option value="1">1 Star</option>
+            </select>
+            <textarea placeholder="Leave your feedback..." rows="4"></textarea>
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</div>
+    {% endfor %}
+    <!-- Social Media Links -->
+</div>
+<script src="{% static 'js/ordertrack.js' %}"></script>
+{% endblock content %}

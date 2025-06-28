@@ -1,0 +1,204 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Added for better layout control */
+}
+
+#menu {
+    padding: 25px;
+}
+
+/* Section title styling */
+#section {
+    text-align: center;
+    font-size: 2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom: 20px;
+}
+
+/* Filter bar styling */
+#filters {
+    display: flex;
+    flex-wrap: wrap; /* Adjusts for responsiveness */
+    gap: 20px; /* Space between filter elements */
+    background-color: #f8f9fa; /* Light background */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px;
+    margin-bottom: 20px; /* Space below the filters */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+}
+
+#filters h2 {
+    flex-basis: 100%; /* Full width for title */
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #343a40;
+}
+
+/* Filter options styling */
+#filters label {
+    flex-basis: 20%; /* Adjust width for each label */
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Space between label and dropdown */
+    font-size: 1rem;
+    color: #495057;
+}
+
+#filters select {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 1rem;
+    color: #212529;
+    transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+#filters select:hover,
+#filters select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none; /* Remove default outline */
+}
+
+/* Specials section */
+#specials {
+    background-color: #ffebcd;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.special-item {
+    margin-bottom: 10px;
+}
+
+/* Menu cards styling */
+.cu_card {
+    margin: 15px !important;
+    width: 300px !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px; /* Rounded card corners */
+    
+    overflow: hidden; /* Prevent overflow of child elements */
+}
+.lexend-bo{
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <bold>;
+    font-style: bold;
+    
+}
+.lexend{
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+  }
+
+.cu_img {
+    width: 100%;
+    height: 200px;
+  
+   
+}
+.card-body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.cu_card:hover {
+    transform: scale(1.05); /* Enlarge slightly on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+/* Flex layout for menu rows */
+#menu_row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+    margin-top: 20px;
+    justify-content: center; /* Center the cards */
+}
+
+/* Cart styling */
+#cart {
+    max-width: 300px;
+    border: 1px solid #aaa;
+    padding: 20px;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Stronger shadow for cart */
+    border-radius: 8px;
+}
+
+/* Add to cart button styling */
+.add-to-cart {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #45a049;
+}
+
+/* Input container styling */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 200px;
+    margin-top: 10px;
+}
+
+.input-container label {
+    font-size: 14px;
+    color: #555;
+}
+
+.input-container input[type="number"] {
+    border: none;
+    border-bottom: 2px solid #f4a261;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+    background: transparent;
+    transition: border-color 0.3s ease;
+}
+
+.input-container input[type="number"]:focus {
+    border-bottom: 2px solid #e76f51;
+}
+.rm_btn{
+    background-color: brown;
+    color: white;
+    margin: 2px;
+    border-radius: 5px;
+    border: 0px;
+    padding: 3px;
+}
+
+/* Button styling inside cards */
+button.btn.btn-primary {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.btn.btn-primary:hover {
+    background-color: #45a049;
+}

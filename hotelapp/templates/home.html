@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{%block CustomHeaders%}
+<link rel="stylesheet" href="{% static "css/home.css" %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{%endblock CustomHeaders%}
+{% block content %}
+<!-- Hero Section -->
+<section id="hero">
+    <div class="carousel">
+        <div class="slide active" style="background-image: url('istockphoto-175197961-612x612.webp');"></div>
+        <div class="slide" style="background-image: url('istockphoto-523041362-612x612.webp');"></div>
+        <div class="slide" style="background-image: url('istockphoto-1442417585-612x612.webp');"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Are You Hungry?</h1>
+        <p>Experience the best cuisines made just for you. Check out our menu now!</p>
+        <div class="hero-buttons">
+            <a href="#menu" class="btn red-btn">VIEW MENU</a>
+        </div>
+    </div>
+</section>
+
+<!-- Special Items Section -->
+<section id="specials">
+    <h2>Top Sellings</h2>
+    <div class="special-items">
+        <div class="item">
+            <h3>Spicy Grilled Chicken</h3>
+            <img src="{% static "img/chicken.jpg" %}" alt="Grilled Chicken">
+            <p>A flavorful delight topped with our special seasoning.</p>
+        </div>
+        <div class="item">
+            <h3>Dosa</h3>
+            <img src="{% static "img/Dosa.jpg" %}" alt="Dosa">
+            <p>Perfectly baked with loads of cheese and fresh pepperoni.</p>
+        </div>
+        <div class="item">
+            <h3>Fried Rice</h3>
+            <img src="{% static "img/FriedRice.jpg" %}" alt="Fried Rice">
+            <p>Fresh and healthy with a zesty lemon dressing.</p>
+        </div>
+    </div>
+</section>
+<script>
+    let index = 0;
+
+function showSlides() {
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === index) {
+            slide.classList.add('active');
+        }
+    });
+
+    index = (index + 1) % slides.length;
+}
+
+setInterval(showSlides, 3000);
+</script>
+{% endblock content %}

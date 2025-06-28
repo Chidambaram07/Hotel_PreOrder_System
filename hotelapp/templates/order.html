@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Order{% endblock title %}
+{%block CustomHeaders%}
+<link rel="stylesheet" href="{% static "css/order.css" %}">
+{%endblock CustomHeaders%}
+{% block content %}
+<div id="order-page">
+    <h1>Order Summary</h1>
+
+    <!-- Cart Summary Section -->
+    <div id="cart-summary">
+        <h2>Cart Summary</h2>
+        <div id="cart-items">
+            {% for item in cart_items %}
+            <div class="cart-item">
+                <p><strong>Food Name:</strong> {{ item.food_name }}</p>
+                <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+                <p><strong>Price:</strong> ₹{{ item.price }}</p>
+                <hr>
+            </div>
+            {% endfor %}
+        </div>
+        <p>Total Cost: <span id="total-cost">₹{{ total_price }}</span></p>
+        <!--button onclick="continueShopping()">Continue Shopping</button-->
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+    <!-- Order Details Form -->
+    <div id="order-details">
+        <h2>Order Details</h2>
+        <label for="pickup-time">Pickup Time:</label>
+        <input type="time" id="pickup-time" name="pickup-time" required>
+        
+        <label for="instructions">Special Instructions:</label>
+        <textarea id="instructions" name="instructions" placeholder="Any special instructions for the kitchen..."></textarea>
+    </div>
+
+    <!-- Payment Section -->
+    <div id="payment-section">
+        <h2>Payment</h2>
+        <label for="payment-method">Choose a payment method:</label>
+        <select id="payment-method">
+            <option value="card">Credit/Debit Card</option>
+            <option value="upi">UPI</option>
+            <option value="wallet">Wallet</option>
+        </select>
+    </div>
+
+    <!-- Place Order Button -->
+    <div id="place-order">
+        <button type="submit">Place Order</button>
+    </div>
+</div>
+</form>
+<!--script src="{% static "js/order.js" %}"--></script>
+{% endblock content %}

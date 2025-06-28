@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{%block CustomHeaders%}
+<link rel="stylesheet" href="{% static "css/home.css" %}">
+{%endblock CustomHeaders%}
+{% block content %}
+<!-- Hero Section -->
+<section id="hero">
+    <div class="carousel">
+        <div class="slide active" style="background-image: url('{% static "img/chicken.jpg" %}');"></div>
+        <div class="slide" style="background-image: url('{% static "img/Dosa.jpg" %}');"></div>
+        <div class="slide" style="background-image: url('{% static "img/idli.jpg" %}');"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Are You Hungry?</h1>
+        <p class="lexend">Experience the best cuisines made just for you. Check out our menu now!</p>
+        <div class="hero-buttons">
+            <a href="{% url "menu" %}" class="btn red-btn">VIEW MENU</a>
+        </div>
+    </div>
+</section>
+
+<!-- Special Items Section -->
+<section id="specials">
+    <h2 class="lexend">Top Sellings</h2>
+    <div class="special-items">
+        {% for food in items %}
+        <div class="item">
+            <h3>{{food.food_name}}</h3>
+            <img src="{{food.image.url}}" alt="{{food.food_name}}">
+            <p>{{food.data.Description}}</p>
+        </div>
+        {% endfor %}
+        <!--div class="item">
+            <h3>Cheesy Pepperoni Pizza</h3>
+            <img src="istockphoto-523041362-612x612.webp" alt="Pepperoni Pizza">
+            <p>Perfectly baked with loads of cheese and fresh pepperoni.</p>
+        </div>
+        <div class="item">
+            <h3>Exotic Veggie Salad</h3>
+            <img src="istockphoto-1442417585-612x612.webp" alt="Veggie Salad">
+            <p>Fresh and healthy with a zesty lemon dressing.</p>
+        </div-->
+    </div>
+</section>
+<link rel="stylesheet" href="">
+{% endblock content %}

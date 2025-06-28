@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{%block CustomHeaders%}
+<link rel="stylesheet" href="{% static "css/additem.css" %}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+{%endblock CustomHeaders%}
+{%block content%}
+<div class="container mt-5">
+    
+    <h2 class="text-center mb-4">Add New Food Item</h2>
+    <h5 class="text-center mb-4"><span style="color: red;">{{error}}</span></h5>
+  
+    
+    <div class="row justify-content-start">
+      <div class="col-md-6">
+        <form method="POST" enctype="multipart/form-data">
+          
+          {% csrf_token %}
+          <div class="mb-3 lexend">
+           
+            <label class=" lexend"  for="foodName" class="form-label">Food Name</label>
+            <input type="text" class="form-control" id="foodName" placeholder="Enter food name" name="food_name" required>
+          </div>
+          <div class=" row mb-3">
+            <div class="col-md-3">
+            <label class=" lexend" for="foodName" class="form-label">Category</label>
+            <select name="sel_cat" id="" class="form-control">
+              <option class=" lexend" value="Non-Vegetarian">Non-Vegetarian</option>
+              <option class=" lexend"  value="Vegetarian">Vegetarian</option>
+            </select>
+          </div>
+          <div class="col-md-3 lexend">
+            <label class=" lexend" for="foodName" class="form-label">Meal</label>
+            <select name="sel_meal" id="" class="form-control">
+              <option class=" lexend" value="BreakFast">BreakFast</option>
+              <option class=" lexend" value="Lunch">Lunch</option>
+              <option class=" lexend" value="Dinner">Dinner</option>
+            </select>
+          </div>
+          </div>
+          <div class="mb-3 lexend">
+            <label class=" lexend"  for="foodPrice" class="form-label">Price (Rupee)</label>
+            <input type="number" class="form-control" id="foodPrice" name="cost" placeholder="Enter food price" required>
+          </div>
+  
+         
+          <div class="mb-3 lexend">
+            <label  class=" lexend" for="foodDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="foodDescription" rows="3" name="description" placeholder="Enter a short description of the food item" required></textarea>
+          </div>          
+          <div class="mb-3 lexend">
+            <label class=" lexend"   for="foodImage" class="form-label">Upload Food Image</label>
+            <input class="form-control" type="file" id="foodImage" name="food_img" accept="image/*" required>
+          </div>
+          <button type="submit" class="btn btn-success w-100">Add Food Item</button>
+        </form>
+      </div>
+      <div class="col-md-6 d-flex align-items-center justify-content-center">
+        <img src="{% static "img/index.jpg" %}" alt="Food Display" class="img-fluid rounded shadow">
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  {% if success %}<script>
+    alert("{{success}}");
+  </script>
+    {% endif %}
+</body>  
+{%endblock content%}

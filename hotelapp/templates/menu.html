@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Menu{% endblock title %}
+{% block CustomHeaders %}
+<link rel="stylesheet" href="{% static "css/menu.css" %}">
+
+{% endblock CustomHeaders %}
+{% block content %}
+<div id="filters">
+    <h2>Filters</h2>
+    <label>
+        Meal Type:
+        <select id="mealType" onchange="filterMenu()">
+            <option value="all">All Types</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="non-vegetarian">Non-Vegetarian</option>
+        </select>
+    </label>
+    <label>
+        Meal Time:
+        <select id="mealTime" onchange="filterMenu()">
+            <option value="all">All</option>
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+        </select>
+    </label>
+    <label>
+        Price Range:
+        <select id="priceRange" onchange="filterMenu()">
+            <option value="all">All Prices</option>
+            <option value="0-100">₹0 - ₹100</option>
+            <option value="100-500">₹100 - ₹500</option>
+            <option value="500-99999">₹500 - Max</option>
+        </select>
+    </label>
+</div>
+
+
+<div id="menu">
+    <h1>Menu</h1>
+    <div id="menu_row">
+        <!-- Sample card layout for a food item -->
+         {% for item in food  %}
+        <div class="card cu_card" data-id={{item.id}} data-meal="{{item.data.Meal}}" data-type="{{item.data.Category}}" data-price="{{item.data.Price}}" >
+            <img src="{{item.image.url}}" class="card-img-top cu_img" alt="Chicken Shawarma">
+            <div class="card-body ca_bt">
+                <h5 class="card-title lexend">{{item.food_name}}</h5>
+                <p class="card-text lexend">Cost: ₹{{item.data.Price}}</p>
+                <p class="card-text lexend">{{item.data.Description}}</p>
+                <p class="card-text lexend">Category: {{item.data.Category}}</p>
+                <p class="card-text lexend">Meal: {{item.data.Meal}}</p>
+                <div class="input-container">
+                    <label for="number">Enter Quantity:</label>
+                    <input type="number" id="q{{item.id}}" value="1"  placeholder="Enter value">
+                </div>
+                <br>
+                <button class="btn btn-primary" onclick="addToCart('{{item.food_name}}', {{item.data.Price}},{{item.id}})">Order</button>
+                
+            </div>
+        </div>
+        {% endfor %}       
+        <!-- Repeat the above block for additional products -->
+    </div>
+</div>
+
+<div id="cart">
+    <h2>Cart</h2>
+    <ul id="cartItems"></ul>
+    <p id="totalPrice">Total: ₹0</p>
+    <button class="btn btn-success" onclick="proceedToCart()">Proceed to Cart</button>
+    <form id="cartForm" method="POST" style="display: none;">
+        {% csrf_token %}
+        <input type="hidden" name="total_price" id="formTotalPrice">
+        <div id="formCartItems"></div>
+        <button type="submit" id="cartSubmitButton">Submit</button>
+    </form>
+</div>
+  
+      <!-- Repeat the above block for additional products -->
+    </div>
+  </div>
+  <script>
+    const cart = [];
+
+    // Filter the menu items based on user selection
+    function filterMenu() {
+        const mealType = document.getElementById('mealType').value.toLowerCase();
+        const mealTime = document.getElementById('mealTime').value.toLowerCase();
+        const priceRange = document.getElementById('priceRange').value;
+    
+        document.querySelectorAll('.card').forEach(item => {
+            const itemType = item.getAttribute('data-type').toLowerCase();
+            const itemMeal = item.getAttribute('data-meal').toLowerCase();
+            const itemPrice = parseFloat(item.getAttribute('data-price'));
+    
+            const [minPrice, maxPrice] = priceRange === 'all' ? [0, Infinity] : priceRange.split('-').map(Number);
+    
+            const matchesType = mealType === 'all' || itemType === mealType;
+            const matchesMeal = mealTime === 'all' || itemMeal === mealTime;
+            const matchesPrice = itemPrice >= minPrice && itemPrice <= maxPrice;
+    
+            if (matchesType && matchesMeal && matchesPrice) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+    
+
+    // Add an item to the cart
+    function addToCart(dish, price, q) {
+        const cartItem = cart.find(item => item.dish === dish);
+        const quan = document.getElementById('q' + q);
+        const value = parseInt(quan.value, 10);
+        if (cartItem) {
+            cartItem.quantity = value;
+        } else {
+            cart.push({ dish, price, quantity: value });
+        }
+
+        updateCart();
+    }
+
+    // Remove an item from the cart
+    function removeFromCart(dish) {
+        const itemIndex = cart.findIndex(item => item.dish === dish);
+        cart.splice(itemIndex, 1);
+
+        updateCart();
+    }
+
+    // Update the cart UI
+    function updateCart() {
+        const cartItemsContainer = document.getElementById('cartItems');
+        const totalPriceEl = document.getElementById('totalPrice');
+        const formCartItems = document.getElementById('formCartItems');
+        const formTotalPrice = document.getElementById('formTotalPrice');
+
+        cartItemsContainer.innerHTML = '';
+        formCartItems.innerHTML = '';
+
+        let totalPrice = 0;
+        cart.forEach((item, index) => {
+            totalPrice += item.price * item.quantity;
+
+            // Update cart UI
+            const li = document.createElement('li');
+            li.innerHTML = `${item.dish} - ₹${item.price} x ${item.quantity} <button onclick="removeFromCart('${item.dish}')" class="rm_btn">Remove</button>`;
+            cartItemsContainer.appendChild(li);
+
+            // Update hidden form
+            const inputDish = document.createElement('input');
+            inputDish.type = 'hidden';
+            inputDish.name = `cart_items[${index}][food_name]`;
+            inputDish.value = item.dish;
+
+            const inputQuantity = document.createElement('input');
+            inputQuantity.type = 'hidden';
+            inputQuantity.name = `cart_items[${index}][quantity]`;
+            inputQuantity.value = item.quantity;
+
+            const inputPrice = document.createElement('input');
+            inputPrice.type = 'hidden';
+            inputPrice.name = `cart_items[${index}][price]`;
+            inputPrice.value = item.price;
+
+            formCartItems.appendChild(inputDish);
+            formCartItems.appendChild(inputQuantity);
+            formCartItems.appendChild(inputPrice);
+        });
+
+        totalPriceEl.textContent = `Total: ₹${totalPrice}`;
+        formTotalPrice.value = totalPrice;
+    }
+
+    // Handle "Proceed to Cart" button click
+    function proceedToCart() {
+        const cartForm = document.getElementById('cartForm');
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+        } else {
+            cartForm.submit();
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        filterMenu();
+    });
+</script>
+{% endblock content %}

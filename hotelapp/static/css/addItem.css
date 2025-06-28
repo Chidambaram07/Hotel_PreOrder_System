@@ -1,0 +1,12 @@
+.justify-content-center{
+    float: left;
+}
+button.btn.btn-success.w-100{
+    background-color: #973131;
+}
+.lexend{
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+  }
